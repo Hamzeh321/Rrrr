@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>امتحان اختيار من متعدد</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .options label {
+            margin-left: 10px;
+        }
+        .submit-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            color: #155724;
+        }
+        .correct-answer {
+            color: green;
+        }
+        .incorrect-answer {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>امتحان اختيار من متعدد</h1>
+    <form id="quizForm">
+        <div id="questions"></div>
+        <button class="submit-button" type="button" onclick="submitQuiz()">إرسال الإجابات</button>
+    </form>
+    <div id="result" class="result" style="display: none;"></div>
+    <script>
+        const questions = [
+            {question: "ما تعريف التفكير؟", options: ["النشاط العقلي", "النشاط البدني", "عملية الكتابة", "عملية القراءة"], correct: 0},
+            {question: "كم عدد أجزاء الدماغ الرئيسية؟", options: ["3", "4", "5", "6"], correct: 0},
+            {question: "ما اسم الجزء الذي يربط بين الدماغ الأمامي والخلفي؟", options: ["المخيخ", "الدماغ الأوسط", "النخاع", "المهاد"], correct: 1},
+            {question: "أي من التالي جزء من التفكير الناقد؟", options: ["التقويم", "الحدس", "العواطف", "الخيال"], correct: 0},
+            {question: "ما هو التفكير الإبداعي؟", options: ["حلول مبتكرة", "حلول تقليدية", "تكرار الأفكار", "التقليد"], correct: 0},
+            {question: "ما هي خطوات التفكير السليم؟", options: ["الاستماع", "التقويم", "الإجابة", "كل ما سبق"], correct: 3},
+            {question: "ما تعريف التفكير الناقد؟", options: ["النقد فقط", "اتخاذ القرارات", "تحليل المعلومات", "التقييم والمراجعة"], correct: 3},
+            {question: "أي من التالي يعبر عن التفكير الإبداعي؟", options: ["الأفكار التقليدية", "حلول خارج الصندوق", "تكرار نفس الحلول", "التجنب"], correct: 1},
+            {question: "ما هي مكونات الدماغ الخلفي؟", options: ["المخ", "المخيخ والجسور", "النخاع فقط", "الدماغ الأوسط"], correct: 1},
+            {question: "كم يزن الدماغ البشري؟", options: ["400 غرام", "500 غرام", "300 غرام", "700 غرام"], correct: 0},
+            {question: "ما هي مراحل التفكير الإبداعي؟", options: ["الإعداد والحضانة", "الإلهام والتحقق", "كل ما سبق", "لا شيء مما سبق"], correct: 2},
+            {question: "ما هي القبعة التي ترمز إلى الحيادية؟", options: ["الحمراء", "السوداء", "البيضاء", "الصفراء"], correct: 2},
+            {question: "ما هو تعريف التفكير الابتكاري؟", options: ["حلول تقليدية", "حلول جديدة", "حلول متكررة", "حلول محدودة"], correct: 1},
+            {question: "أي من التالي يشمل التفكير الناقد؟", options: ["التحليل", "التقييم", "الإبداع", "التحليل والتقييم"], correct: 3},
+            {question: "ما هي الخطوة الأولى في التفكير السليم؟", options: ["الاستماع", "التقويم", "الاستفسار", "الإجابة"], correct: 0},
+            {question: "كم عدد خلايا الدماغ العصبية؟", options: ["100 مليار", "80 مليار", "86 مليار", "60 مليار"], correct: 2},
+            {question: "أي من هذه الخيارات جزء من الدماغ الأمامي؟", options: ["المخ", "المخيخ", "النخاع", "الدماغ الأوسط"], correct: 0},
+            {question: "أي من القبعات يرمز إلى التفكير الإبداعي؟", options: ["الصفراء", "الخضراء", "السوداء", "الزرقاء"], correct: 1},
+            {question: "ما هي الخطوة الأخيرة للتفكير السليم؟", options: ["الإجابة", "التحليل", "التقويم", "الاستماع"], correct: 0},
+            {question: "ما هي أهمية التفكير الناقد؟", options: ["اتخاذ القرارات السليمة", "التحليل العميق", "جمع المعلومات", "كل ما سبق"], correct: 3},
+            // أضف المزيد من الأسئلة
+        ];
+
+        const questionsDiv = document.getElementById("questions");
+
+        questions.forEach((q, index) => {
+            const questionDiv = document.createElement("div");
+            questionDiv.classList.add("question");
+
+            const questionLabel = document.createElement("label");
+            questionLabel.innerHTML = `س${index + 1}: ${q.question}`;
+            questionDiv.appendChild(questionLabel);
+
+            const optionsDiv = document.createElement("div");
+            optionsDiv.classList.add("options");
+
+            q.options.forEach((option, i) => {
+                const optionLabel = document.createElement("label");
+                const optionInput = document.createElement("input");
+                optionInput.type = "radio";
+                optionInput.name = `q${index}`;
+                optionInput.value = i;
+
+                optionLabel.appendChild(optionInput);
+                optionLabel.innerHTML += option;
+                optionsDiv.appendChild(optionLabel);
+                optionsDiv.appendChild(document.createElement("br"));
+            });
+
+            questionDiv.appendChild(optionsDiv);
+            questionsDiv.appendChild(questionDiv);
+        });
+
+        function submitQuiz() {
+            let score = 0;
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "";
+            questions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="q${index}"]:checked`);
+                const questionResult = document.createElement("div");
+
+                if (selectedOption && parseInt(selectedOption.value) === q.correct) {
+                    score++;
+                    questionResult.innerHTML = `س${index + 1}: إجابة صحيحة`;
+                    questionResult.classList.add("correct-answer");
+                } else {
+                    questionResult.innerHTML = `س${index + 1}: إجابة خاطئة. الإجابة الصحيحة هي: "${q.options[q.correct]}"`;
+                    questionResult.classList.add("incorrect-answer");
+                }
+
+                resultDiv.appendChild(questionResult);
+            });
+
+            resultDiv.style.display = "block";
+            resultDiv.innerHTML += `<br><strong>نتيجتك النهائية: ${score} من ${questions.length}</strong>`;
+        }
+    </script>
+
+</body></html>
