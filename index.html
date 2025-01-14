@@ -1,68 +1,101 @@
-<!doctype html>
-<html lang="ar"> 
- <head> 
-  <meta charset="UTF-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>امتحان اختيار من متعدد</title> 
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>امتحان اختيار من متعدد</title>
   <style>
-        body {
-            font-family: Arial, sans-serif;
-            direction: rtl;
-            text-align: right;
-            margin: 20px;
-            background-color: #f4f4f9;
-        }
-        .question {
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #ffffff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .options label {
-            margin-left: 10px;
-        }
-        .submit-button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .submit-button:hover {
-            background-color: #0056b3;
-        }
-        .result {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            border-radius: 5px;
-            color: #155724;
-        }
-        .correct-answer {
-            color: green;
-        }
-        .incorrect-answer {
-            color: red;
-        }
-        .feedback {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-    </style> 
- </head> 
- <body> 
-  <h1>امتحان اختيار من متعدد</h1> 
-  <form id="quizForm"> 
-   <div id="questions"></div> 
-   <button class="submit-button" type="button" onclick="submitQuiz()">إرسال الإجابات</button> 
-  </form> 
-  <div id="result" class="result" style="display: none;"></div> 
+    body {
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      text-align: right;
+      margin: 20px;
+      background-color: #f4f4f9;
+    }
+    .hidden {
+      display: none;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .options label {
+      margin-left: 10px;
+    }
+    .button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      text-align: center;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background: #0056b3;
+    }
+    .result {
+      background-color: #d4edda;
+      padding: 20px;
+      border-radius: 8px;
+      color: #155724;
+      text-align: center;
+    }
+    .review {
+      background: #f8d7da;
+      padding: 20px;
+      border-radius: 8px;
+      color: #721c24;
+    }
+    .review .correct {
+      color: green;
+    }
+    .timer {
+      text-align: center;
+      font-size: 1.5rem;
+      color: #dc3545;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- صفحة الأسئلة -->
+  <div id="quizPage" class="container">
+    <h1>امتحان اختيار من متعدد</h1>
+    <div class="timer" id="timer">40:00</div>
+    <div id="questions"></div>
+    <button class="button" onclick="submitQuiz()">إرسال الإجابات</button>
+  </div>
+
+  <!-- صفحة النتيجة -->
+  <div id="resultPage" class="container hidden">
+    <h2>نتيجتك النهائية</h2>
+    <div id="result" class="result"></div>
+    <button class="button" onclick="goToReview()">مراجعة الإجابات</button>
+  </div>
+
+  <!-- صفحة مراجعة الإجابات -->
+  <div id="reviewPage" class="container hidden">
+    <h2>مراجعة الإجابات</h2>
+    <div id="review"></div>
+  </div>
+
   <script>
-        const questions = [
+    const questions = [
   {question: "ما هو تعريف مهارة التواصل الفعّال؟", options: ["نقل الأفكار بوضوح وفهم الآخرين", "إرسال الرسائل فقط", "استخدام الإشارات دون كلام", "التعبير عن المشاعر فقط"], correct: 0},
   {question: "ما هي أنواع مهارات التواصل؟", options: ["التواصل اللفظي وغير اللفظي", "التواصل الكتابي", "التواصل البصري", "جميع ما سبق"], correct: 3},
   {question: "ما هي العوامل المؤثرة في التواصل؟", options: ["الثقة بالنفس", "وضوح الرسالة", "اختيار الوقت المناسب", "جميع ما سبق"], correct: 3},
@@ -81,6 +114,18 @@
   {question: "ما هو الفرق بين الضغط النفسي الإيجابي والسلبي؟", options: ["الإيجابي يحفز، والسلبي يثبط", "كلاهما مفيدان", "السلبي دائمًا أفضل", "الإيجابي دائمًا مضر"], correct: 0},
   {question: "ما هي الخطوة الأخيرة في اتخاذ القرار؟", options: ["تنفيذ القرار", "جمع المعلومات", "تحليل الخيارات", "تحديد المشكلة"], correct: 0},
   {question: "ما هي أهمية تحديد الأولويات؟", options: ["إنجاز المهام الأكثر أهمية أولاً", "تأجيل المهام الصعبة", "التخلص من المهام الزائدة", "إهمال العمل غير المهم"], correct: 0},
+ 
+  {question: "ما هو الهدف الأساسي من مهارات الحياة؟", options: ["تطوير السلوك الإيجابي", "زيادة العبء على الأفراد", "التقليل من أهمية الوقت", "إهمال المهارات التقنية"], correct: 0},
+  {question: "ما هو الأسلوب الأنسب لإدارة الوقت؟", options: ["تحديد الأهداف وترتيب الأولويات", "القيام بجميع المهام دفعة واحدة", "تأجيل المهام غير الضرورية", "العمل بدون خطة"], correct: 0},
+  {question: "ما هو مفهوم التفكير الإبداعي؟", options: ["إيجاد حلول مبتكرة وغير تقليدية", "استخدام الطرق التقليدية دائمًا", "تكرار الأفكار السابقة", "التقليل من أهمية الأفكار الجديدة"], correct: 0},
+  {question: "ما هي المهارات التي تسهم في بناء العلاقات الاجتماعية؟", options: ["التواصل الفعّال", "القدرة على التعاون", "الذكاء العاطفي", "جميع ما سبق"], correct: 3},
+  {question: "ما هي أحد أهداف مهارات حل النزاعات؟", options: ["الوصول إلى حل يرضي جميع الأطراف", "فرض القوة لحل المشكلة", "الانسحاب من النزاع", "إهمال المشكلة"], correct: 0},
+  {question: "ما هو الفرق بين التفكير الناقد والتفكير العاطفي؟", options: ["التفكير الناقد يعتمد على التحليل", "التفكير العاطفي يعتمد على المشاعر", "التفكير الناقد منطقي، والعاطفي غير منطقي", "جميع ما سبق"], correct: 3},
+  {question: "ما هي الأساليب الفعالة لإدارة الضغوط؟", options: ["ممارسة الرياضة", "الاسترخاء والتنفس العميق", "التحدث مع شخص موثوق", "جميع ما سبق"], correct: 3},
+  {question: "ما هو الدور الأساسي للتغذية الراجعة في التعليم؟", options: ["تصحيح الأخطاء وتعزيز الأداء", "إحباط المتعلم", "زيادة الضغوط النفسية", "إهمال الإنجاز"], correct: 0},
+  {question: "ما هي أنواع القرارات؟", options: ["قرارات شخصية", "قرارات مهنية", "قرارات جماعية", "جميع ما سبق"], correct: 3},
+  {question: "ما هو تعريف النزاع؟", options: ["تعارض بين طرفين أو أكثر نتيجة اختلاف الآراء أو الأهداف", "اتفاق كامل بين الأطراف", "عملية اتخاذ القرار دون تفكير", "سوء استخدام الوقت"], correct: 0},
+
   {question: "ما هي المهارات الشخصية التي تعزز النجاح؟", options: ["الذكاء العاطفي", "إدارة الوقت", "التفكير الإبداعي", "جميع ما سبق"], correct: 3},
   {question: "ما هو تعريف الذكاء العاطفي؟", options: ["القدرة على التعرف على المشاعر والتحكم بها", "اتخاذ القرارات بسرعة", "عدم التأثر بالمشاعر", "التركيز على الحلول العملية فقط"], correct: 0},
   {question: "ما هو تعريف مهارة التواصل الفعّال؟", options: ["نقل الأفكار بوضوح وفهم الآخرين", "إرسال الرسائل فقط", "استخدام الإشارات دون كلام", "التعبير عن المشاعر فقط"], correct: 0},
@@ -105,69 +150,98 @@
   {question: "ما هو تعريف الذكاء العاطفي؟", options: ["القدرة على التعرف على المشاعر والتحكم بها", "اتخاذ القرارات بسرعة", "عدم التأثر بالمشاعر", "التركيز على الحلول العملية فقط"], correct: 0}
 ];
 
+    // إنشاء الأسئلة
+    const questionsDiv = document.getElementById("questions");
+    questions.forEach((q, index) => {
+      const questionDiv = document.createElement("div");
+      questionDiv.classList.add("question");
 
-        // تغيير ترتيب الإجابات بشكل عشوائي
-        questions.forEach(q => {
-            const correctAnswer = q.options[q.correct];
-            q.options.sort(() => Math.random() - 0.5);
-            q.correct = q.options.indexOf(correctAnswer);
-        });
+      const questionLabel = document.createElement("label");
+      questionLabel.innerHTML = `س${index + 1}: ${q.question}`;
+      questionDiv.appendChild(questionLabel);
 
-        const questionsDiv = document.getElementById("questions");
+      const optionsDiv = document.createElement("div");
+      optionsDiv.classList.add("options");
 
-        questions.forEach((q, index) => {
-            const questionDiv = document.createElement("div");
-            questionDiv.classList.add("question");
+      q.options.forEach((option, i) => {
+        const optionLabel = document.createElement("label");
+        const optionInput = document.createElement("input");
+        optionInput.type = "radio";
+        optionInput.name = `q${index}`;
+        optionInput.value = i;
 
-            const questionLabel = document.createElement("label");
-            questionLabel.innerHTML = `س${index + 1}: ${q.question}`;
-            questionDiv.appendChild(questionLabel);
+        optionLabel.appendChild(optionInput);
+        optionLabel.innerHTML += option;
+        optionsDiv.appendChild(optionLabel);
+        optionsDiv.appendChild(document.createElement("br"));
+      });
 
-            const optionsDiv = document.createElement("div");
-            optionsDiv.classList.add("options");
+      questionDiv.appendChild(optionsDiv);
+      questionsDiv.appendChild(questionDiv);
+    });
 
-            q.options.forEach((option, i) => {
-                const optionLabel = document.createElement("label");
-                const optionInput = document.createElement("input");
-                optionInput.type = "radio";
-                optionInput.name = `q${index}`;
-                optionInput.value = i;
+    // عداد الوقت
+    let timeLeft = 40 * 60; // 40 دقيقة بالثواني
+    const timerElement = document.getElementById("timer");
 
-                optionLabel.appendChild(optionInput);
-                optionLabel.innerHTML += option;
-                optionsDiv.appendChild(optionLabel);
-                optionsDiv.appendChild(document.createElement("br"));
-            });
+    function updateTimer() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
-            questionDiv.appendChild(optionsDiv);
-            questionsDiv.appendChild(questionDiv);
-        });
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        submitQuiz(); // إرسال الإجابات تلقائيًا عند انتهاء الوقت
+      } else {
+        timeLeft--;
+      }
+    }
 
-        function submitQuiz() {
-            let score = 0;
-            const resultDiv = document.getElementById("result");
-            resultDiv.innerHTML = "";
-            questions.forEach((q, index) => {
-                const selectedOption = document.querySelector(`input[name="q${index}"]:checked`);
-                const questionDiv = document.querySelector(`#questions > div:nth-child(${index + 1})`);
-                const feedbackDiv = document.createElement("div");
-                feedbackDiv.classList.add("feedback");
+    const timerInterval = setInterval(updateTimer, 1000);
 
-                if (selectedOption && parseInt(selectedOption.value) === q.correct) {
-                    score++;
-                    feedbackDiv.innerHTML = `إجابة صحيحة`;
-                    feedbackDiv.classList.add("correct-answer");
-                } else {
-                    feedbackDiv.innerHTML = `إجابة خاطئة. الإجابة الصحيحة هي: "${q.options[q.correct]}"`;
-                    feedbackDiv.classList.add("incorrect-answer");
-                }
+    function submitQuiz() {
+      let score = 0;
 
-                questionDiv.appendChild(feedbackDiv);
-            });
-
-            resultDiv.style.display = "block";
-            resultDiv.innerHTML += `<strong>نتيجتك النهائية: ${score} من ${questions.length}</strong>`;
+      questions.forEach((q, index) => {
+        const selectedOption = document.querySelector(`input[name="q${index}"]:checked`);
+        if (selectedOption && parseInt(selectedOption.value) === q.correct) {
+          score++;
         }
-    </script> 
- </body>
+      });
+
+      // إظهار صفحة النتيجة
+      document.getElementById("quizPage").classList.add("hidden");
+      document.getElementById("resultPage").classList.remove("hidden");
+
+      // عرض النتيجة النهائية
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = `<strong>${score}</strong> من <strong>${questions.length}</strong>`;
+    }
+
+    function goToReview() {
+      // إظهار صفحة مراجعة الإجابات
+      document.getElementById("resultPage").classList.add("hidden");
+      document.getElementById("reviewPage").classList.remove("hidden");
+
+      // إنشاء مراجعة الإجابات
+      const reviewDiv = document.getElementById("review");
+      reviewDiv.innerHTML = ""; // مسح محتوى المراجعة
+
+      questions.forEach((q, index) => {
+        const questionReview = document.createElement("div");
+        questionReview.classList.add("review");
+
+        const questionLabel = document.createElement("p");
+        questionLabel.innerHTML = `<strong>س${index + 1}:</strong> ${q.question}`;
+        questionReview.appendChild(questionLabel);
+
+        const correctAnswer = document.createElement("p");
+        correctAnswer.innerHTML = `<strong>الإجابة الصحيحة:</strong> <span class="correct">${q.options[q.correct]}</span>`;
+        questionReview.appendChild(correctAnswer);
+
+        reviewDiv.appendChild(questionReview);
+      });
+    }
+  </script>
+</body>
 </html>
