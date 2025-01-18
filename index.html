@@ -3,236 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>امتحان اختيار من متعدد</title>
+  <title>معجنات شهية</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       direction: rtl;
       text-align: right;
-      margin: 20px;
-      background-color: #f4f4f9;
-    }
-    .hidden {
-      display: none;
-    }
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    h1, h2 {
-      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f5f2;
       color: #333;
     }
-    .question {
-      margin-bottom: 20px;
+    header {
+      background-color: #e67e22;
+      color: white;
+      padding: 20px;
+      text-align: center;
     }
-    .options label {
-      margin-left: 10px;
+    header h1 {
+      margin: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 10px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      text-align: center;
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card h2 {
+      font-size: 1.5em;
+      margin: 10px 0;
+    }
+    .card p {
+      font-size: 0.9em;
+      color: #777;
+      margin: 10px;
+    }
+    .card .price {
+      font-size: 1.2em;
+      color: #e67e22;
+      font-weight: bold;
+      margin: 10px 0;
     }
     .button {
-      display: block;
-      width: 100%;
-      margin: 10px 0;
-      padding: 10px;
-      text-align: center;
-      background: #007bff;
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px 0 20px;
+      background-color: #e67e22;
       color: white;
-      border: none;
+      text-decoration: none;
       border-radius: 5px;
-      cursor: pointer;
+      font-weight: bold;
     }
     .button:hover {
-      background: #0056b3;
+      background-color: #d35400;
     }
-    .result {
-      background-color: #d4edda;
-      padding: 20px;
-      border-radius: 8px;
-      color: #155724;
+    footer {
+      background-color: #333;
+      color: white;
       text-align: center;
-    }
-    .review {
-      background: #f8d7da;
-      padding: 20px;
-      border-radius: 8px;
-      color: #721c24;
-    }
-    .review .correct {
-      color: green;
-    }
-    .timer {
-      text-align: center;
-      font-size: 1.5rem;
-      color: #dc3545;
-      margin-bottom: 20px;
+      padding: 10px 0;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <!-- صفحة الأسئلة -->
-  <div id="quizPage" class="container">
-    <h1>امتحان اختيار من متعدد</h1>
-    <div class="timer" id="timer">40:00</div>
-    <div id="questions"></div>
-    <button class="button" onclick="submitQuiz()">إرسال الإجابات</button>
+  <header>
+    <h1>معجنات شهية</h1>
+    <p>أفضل أنواع المعجنات الطازجة يوميًا!</p>
+  </header>
+
+  <div class="container">
+    <div class="grid">
+      <div class="card">
+        <img src="https://via.placeholder.com/250x200" alt="بيتزا مارغريتا">
+        <h2>بيتزا مارغريتا</h2>
+        <p>عجينة هشة مع صلصة الطماطم الطازجة وجبنة الموزاريلا.</p>
+        <div class="price">10 دولار</div>
+        <a href="#" class="button">اطلب الآن</a>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/250x200" alt="فطائر الزعتر">
+        <h2>فطائر الزعتر</h2>
+        <p>فطائر محشوة بالزعتر وزيت الزيتون على الطريقة التقليدية.</p>
+        <div class="price">5 دولار</div>
+        <a href="#" class="button">اطلب الآن</a>
+      </div>
+      <div class="card">
+        <img src="https://images.app.goo.gl/RbpztL9gUvY3VZ3e7" alt="كرواسون الجبنة">
+        <h2>كرواسون الجبنة</h2>
+        <p>كرواسون طري ومحشو بالجبنة الذائبة.</p>
+        <div class="price">8 دولار</div>
+        <a href="#" class="button">اطلب الآن</a>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/250x200" alt="سمبوسة باللحم">
+        <h2>سمبوسة باللحم</h2>
+        <p>سمبوسة ذهبية ومحشوة باللحم الطازج والتوابل.</p>
+        <div class="price">7 دولار</div>
+        <a href="#" class="button">اطلب الآن</a>
+      </div>
+      <div class="card">
+        <img src="https://drive.google.com/file/d/1EuAqoxBGUqp-Iqdt1EmmuUggs7Q-kJWo/view?usp=drivesdk" alt="منقوشة الجبنة">
+        <h2>منقوشة الجبنة</h2>
+        <p>منقوشة لذيذة مع خليط الجبنة الخاصة والمخبوزة بعناية.</p>
+        <div class="price">6 دولار</div>
+        <a href="#" class="button">اطلب الآن</a>
+      </div>
+    </div>
   </div>
 
-  <!-- صفحة النتيجة -->
-  <div id="resultPage" class="container hidden">
-    <h2>نتيجتك النهائية</h2>
-    <div id="result" class="result"></div>
-    <button class="button" onclick="goToReview()">مراجعة الإجابات</button>
-  </div>
-
-  <!-- صفحة مراجعة الإجابات -->
-  <div id="reviewPage" class="container hidden">
-    <h2>مراجعة الإجابات</h2>
-    <div id="review"></div>
-  </div>
-
-  <script>
-    const questions = [
-  {question: "ما هو تعريف المهارة؟", options: ["القدرة على القيام بعمل معين بإتقان وسرعة", "الإبداع في حل المشكلات", "تحديد الأولويات بشكل صحيح", "الابتعاد عن التوتر"], correct: 0},
-  {question: "ما هي شروط اكتساب المهارة؟", options: ["النضج العقلي والعصبي", "التشجيع المستمر", "الرغبة في التعلم", "جميع ما سبق"], correct: 3},
-  {question: "ما هي استراتيجية التعلم بالنمذجة؟", options: ["استخدام المحاكاة لتعلم سلوك جديد", "الاعتماد على الذات", "إهمال التوجيه", "التركيز على المهارات التقنية فقط"], correct: 0},
-  {question: "ما هو دور التغذية الراجعة في التدريب؟", options: ["تحسين الأداء", "تعزيز الاستجابات السلبية", "تقليل التعلم", "زيادة الضغوط النفسية"], correct: 0},
-  {question: "ما هي أبعاد مهارات التواصل الاجتماعي؟", options: ["التواصل اللفظي وغير اللفظي", "المشاركة الوجدانية", "حل المشكلات", "جميع ما سبق"], correct: 3},
-  {question: "ما هو الفرق بين التواصل اللفظي وغير اللفظي؟", options: ["اللفظي يعتمد على الكلمات، وغير اللفظي يعتمد على الإشارات", "اللفظي أكثر تأثيرًا دائمًا", "غير اللفظي لا يستخدم في الحياة اليومية", "لا فرق بينهما"], correct: 0},
-  {question: "ما هي خصائص الوقت؟", options: ["لا يمكن تخزينه", "مورد نادر", "يمضي بسرعة ثابتة", "جميع ما سبق"], correct: 3},
-  {question: "ما هو تعريف إدارة الوقت؟", options: ["استخدام الوقت بفعالية لتحقيق الأهداف", "تقليل ساعات العمل", "زيادة الجهد المبذول", "تجنب التخطيط"], correct: 0},
-  {question: "ما هي مراحل حل المشكلات؟", options: ["تحديد المشكلة", "جمع المعلومات", "تقييم الحلول", "جميع ما سبق"], correct: 3},
-  {question: "ما هي مهارات التفكير الإبداعي؟", options: ["العصف الذهني", "تقييم الأفكار", "توليد الأفكار الجديدة", "جميع ما سبق"], correct: 3},
-  {question: "ما هو تعريف الضغوط النفسية؟", options: ["التوتر الناتج عن مطالب البيئة", "الشعور بالسعادة الزائدة", "حالة من الاسترخاء المؤقت", "الشعور بالعجز الدائم"], correct: 0},
-  {question: "ما هي أنواع الضغوط النفسية؟", options: ["الضغط الحالي", "الضغط المزمن", "الضغط الناتج عن الصدمة", "جميع ما سبق"], correct: 3},
-  {question: "ما هو التفكير النقدي؟", options: ["تحليل المعلومات واتخاذ قرارات بناء عليها", "التسرع في اتخاذ القرارات", "اتباع الآراء دون تفكير", "استخدام المشاعر فقط"], correct: 0},
-  {question: "ما هي خطوات اتخاذ القرار؟", options: ["تحديد المشكلة", "اختيار البدائل", "تقييم النتائج", "جميع ما سبق"], correct: 3},
-  {question: "ما هي العوامل المؤثرة في إدارة الوقت؟", options: ["وضوح الأهداف", "تحديد الأولويات", "تجنب التسويف", "جميع ما سبق"], correct: 3},
-  {question: "ما هو تعريف التعاون؟", options: ["اشتراك الطفل مع زملائه لتحقيق هدف محدد", "التنافس مع الآخرين", "العمل بشكل فردي", "تجنب العمل الجماعي"], correct: 0},
-  {question: "ما هي استراتيجيات إدارة النزاع؟", options: ["التفاوض", "التجنب", "التعاون", "جميع ما سبق"], correct: 3},
-  {question: "ما هي خطوات تحليل المشكلة؟", options: ["تحديد المشكلة", "تحليل الأسباب", "جمع المعلومات", "جميع ما سبق"], correct: 3},
-  {question: "ما هي استراتيجيات حل المشكلات؟", options: ["الاستراتيجيات الروتينية", "الاستراتيجيات التحليلية", "الاستراتيجيات الإبداعية", "جميع ما سبق"], correct: 3},
-  {question: "ما هو دور التفكير الإبداعي في حل المشكلات؟", options: ["توليد أفكار جديدة", "تحليل الأفكار الحالية", "تجنب الحلول التقليدية", "جميع ما سبق"], correct: 3},
-  {question: "ما هو المبدأ الأساسي في إدارة الوقت؟", options: ["تحديد الأهداف بوضوح", "تقليل الأنشطة غير الضرورية", "زيادة ساعات العمل", "إهمال الأولويات"], correct: 0},
-  {question: "ما هي الخطوة الأولى في إدارة الوقت الفعالة؟", options: ["تحديد الأهداف", "إنشاء جدول زمني", "البدء بالعمل", "تحليل الأخطاء السابقة"], correct: 0},
-  {question: "ما هي الطريقة الأكثر فعالية لتحديد الأولويات؟", options: ["طريقة مصفوفة أيزنهاور", "تقليل الأنشطة", "اختيار المهام السهلة أولاً", "تأجيل المهام الصعبة"], correct: 0},
-  {question: "كيف يمكن تقليل التشتت أثناء العمل؟", options: ["إيقاف الإشعارات", "تجنب الاجتماعات غير الضرورية", "تحديد فترات عمل مركزة", "جميع ما سبق"], correct: 3},
-  {question: "ما هو مفهوم الوقت الميت؟", options: ["الوقت غير المستغل بشكل منتج", "الوقت المستخدم في التخطيط", "الوقت الذي يقضيه الفرد في الراحة", "وقت الانتقال بين المهام"], correct: 0},
-  {question: "كيف يمكن استخدام الوقت الميت بفعالية؟", options: ["التخطيط للمستقبل", "إنجاز المهام القصيرة", "تعلم مهارات جديدة", "جميع ما سبق"], correct: 3},
-  {question: "ما هي أحد أسباب التسويف؟", options: ["الخوف من الفشل", "نقص الحافز", "عدم وضوح المهام", "جميع ما سبق"], correct: 3},
-  {question: "ما هي الطريقة المثلى للتعامل مع التسويف؟", options: ["تقسيم المهام الكبيرة إلى أجزاء صغيرة", "تأجيل المهام غير الضرورية", "تحديد مواعيد نهائية صارمة", "جميع ما سبق"], correct: 3},
-  {question: "ما هو تأثير إدارة الوقت الجيدة على الصحة النفسية؟", options: ["تقليل التوتر والضغط", "زيادة الشعور بالإنجاز", "تعزيز التركيز", "جميع ما سبق"], correct: 3},
-  {question: "ما الفرق بين الكفاءة والفعالية في إدارة الوقت؟", options: ["الكفاءة تعني إنجاز المهام بشكل صحيح، الفعالية تعني اختيار المهام الصحيحة", "الكفاءة هي القيام بعدد كبير من المهام، والفعالية هي تقليل المهام", "الكفاءة تعتمد على التخطيط فقط، والفعالية تعتمد على التنفيذ فقط", "لا فرق بينهما"], correct: 0},
-  {question: "ما هو دور استخدام التكنولوجيا في إدارة الوقت؟", options: ["تنظيم المهام وجدولتها", "تتبع الوقت المستهلك", "تقليل الأخطاء اليدوية", "جميع ما سبق"], correct: 3},
-  {question: "ما هي القاعدة الذهبية لإدارة الوقت؟", options: ["العمل على المهام الأكثر أهمية أولاً", "إنجاز المهام الصغيرة أولاً", "العمل على المهام الأصعب في نهاية اليوم", "تجنب التخطيط المسبق"], correct: 0},
-  {question: "ما هي أهم خصائص الوقت؟", options: ["غير قابل للاسترجاع", "ثابت ومحدد", "يمكن تخصيصه بفعالية", "جميع ما سبق"], correct: 3},
-  {question: "كيف تؤثر الاجتماعات غير الضرورية على إدارة الوقت؟", options: ["تضيع الوقت الإنتاجي", "تزيد من الضغط النفسي", "تقلل من الإنجاز", "جميع ما سبق"], correct: 3},
-  {question: "ما هو أفضل وقت لإنجاز المهام التي تتطلب تركيزًا عاليًا؟", options: ["في بداية اليوم", "بعد الظهيرة", "قبل النوم", "في أي وقت"], correct: 0},
-  {question: "ما هي استراتيجية تقسيم الوقت؟", options: ["تخصيص فترات زمنية محددة لكل مهمة", "إنجاز كل المهام دفعة واحدة", "التركيز على مهمة واحدة طوال اليوم", "العمل بدون جدول زمني"], correct: 0},
-  {question: "ما هي أهم فوائد وضع قائمة مهام يومية؟", options: ["توضيح المهام المطلوبة", "تقليل النسيان", "زيادة الشعور بالإنجاز", "جميع ما سبق"], correct: 3},
-  {question: "ما هي الطريقة الصحيحة للتعامل مع المهام العاجلة وغير المهمة؟", options: ["تفويضها لشخص آخر", "القيام بها فورًا", "تأجيلها إلى وقت لاحق", "إلغاؤها تمامًا"], correct: 0},
-  {question: "ما هو مفهوم أولوية (80/20) في إدارة الوقت؟", options: ["80% من النتائج تأتي من 20% من الجهد", "80% من الوقت يُهدر في الأنشطة غير الضرورية", "20% من الأشخاص ينجزون 80% من المهام", "لا علاقة بين الجهد والنتائج"], correct: 0},
-  {question: "كيف يمكن تحقيق التوازن بين العمل والحياة الشخصية؟", options: ["تحديد وقت للعمل ووقت للراحة", "وضع حدود واضحة بين العمل والحياة", "تجنب العمل خارج ساعات العمل", "جميع ما سبق"], correct: 3}
-];
-
-
-
-
-    // إنشاء الأسئلة
-    const questionsDiv = document.getElementById("questions");
-    questions.forEach((q, index) => {
-      const questionDiv = document.createElement("div");
-      questionDiv.classList.add("question");
-
-      const questionLabel = document.createElement("label");
-      questionLabel.innerHTML = `س${index + 1}: ${q.question}`;
-      questionDiv.appendChild(questionLabel);
-
-      const optionsDiv = document.createElement("div");
-      optionsDiv.classList.add("options");
-
-      q.options.forEach((option, i) => {
-        const optionLabel = document.createElement("label");
-        const optionInput = document.createElement("input");
-        optionInput.type = "radio";
-        optionInput.name = `q${index}`;
-        optionInput.value = i;
-
-        optionLabel.appendChild(optionInput);
-        optionLabel.innerHTML += option;
-        optionsDiv.appendChild(optionLabel);
-        optionsDiv.appendChild(document.createElement("br"));
-      });
-
-      questionDiv.appendChild(optionsDiv);
-      questionsDiv.appendChild(questionDiv);
-    });
-
-    // عداد الوقت
-    let timeLeft = 40 * 60; // 40 دقيقة بالثواني
-    const timerElement = document.getElementById("timer");
-
-    function updateTimer() {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-
-      if (timeLeft <= 0) {
-        clearInterval(timerInterval);
-        submitQuiz(); // إرسال الإجابات تلقائيًا عند انتهاء الوقت
-      } else {
-        timeLeft--;
-      }
-    }
-
-    const timerInterval = setInterval(updateTimer, 1000);
-
-    function submitQuiz() {
-      let score = 0;
-
-      questions.forEach((q, index) => {
-        const selectedOption = document.querySelector(`input[name="q${index}"]:checked`);
-        if (selectedOption && parseInt(selectedOption.value) === q.correct) {
-          score++;
-        }
-      });
-
-      // إظهار صفحة النتيجة
-      document.getElementById("quizPage").classList.add("hidden");
-      document.getElementById("resultPage").classList.remove("hidden");
-
-      // عرض النتيجة النهائية
-      const resultDiv = document.getElementById("result");
-      resultDiv.innerHTML = `<strong>${score}</strong> من <strong>${questions.length}</strong>`;
-    }
-
-    function goToReview() {
-      // إظهار صفحة مراجعة الإجابات
-      document.getElementById("resultPage").classList.add("hidden");
-      document.getElementById("reviewPage").classList.remove("hidden");
-
-      // إنشاء مراجعة الإجابات
-      const reviewDiv = document.getElementById("review");
-      reviewDiv.innerHTML = ""; // مسح محتوى المراجعة
-
-      questions.forEach((q, index) => {
-        const questionReview = document.createElement("div");
-        questionReview.classList.add("review");
-
-        const questionLabel = document.createElement("p");
-        questionLabel.innerHTML = `<strong>س${index + 1}:</strong> ${q.question}`;
-        questionReview.appendChild(questionLabel);
-
-        const correctAnswer = document.createElement("p");
-        correctAnswer.innerHTML = `<strong>الإجابة الصحيحة:</strong> <span class="correct">${q.options[q.correct]}</span>`;
-        questionReview.appendChild(correctAnswer);
-
-        reviewDiv.appendChild(questionReview);
-      });
-    }
-  </script>
+  <footer>
+    <p>© 2025 جميع الحقوق محفوظة - معجنات شهية</p>
+  </footer>
 </body>
 </html>
