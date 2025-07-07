@@ -1,136 +1,116 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>معجنات شهية</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      direction: rtl;
-      text-align: right;
-      margin: 0;
-      padding: 0;
-      background-color: #f8f5f2;
-      color: #333;
-    }
-    header {
-      background-color: #e67e22;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 10px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      text-align: center;
-    }
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-    .card h2 {
-      font-size: 1.5em;
-      margin: 10px 0;
-    }
-    .card p {
-      font-size: 0.9em;
-      color: #777;
-      margin: 10px;
-    }
-    .card .price {
-      font-size: 1.2em;
-      color: #e67e22;
-      font-weight: bold;
-      margin: 10px 0;
-    }
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      margin: 10px 0 20px;
-      background-color: #e67e22;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-    }
-    .button:hover {
-      background-color: #d35400;
-    }
-    footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 10px 0;
-      margin-top: 20px;
-    }
-  </style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>جامعة اربد الأهلية</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        h2 {
+            text-align: center;
+            color: #555;
+            font-size: 16px;
+            margin-top: -10px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 8px;
+            box-sizing: border-box;
+        }
+        .input-group label {
+            font-size: 14px;
+            color: #333;
+        }
+        .button-container {
+            text-align: center;
+        }
+        .button-container button {
+            width: 100%;
+            padding: 14px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button-container button:hover {
+            background-color: #45a049;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>معجنات شهية</h1>
-    <p>أفضل أنواع المعجنات الطازجة يوميًا!</p>
-  </header>
-
-  <div class="container">
-    <div class="grid">
-      <div class="card">
-        <img src="https://i.postimg.cc/WpnZ4cFV/image.jpg" alt="بيتزا مارغريتا">
-        <h2>بيتزا مارغريتا</h2>
-        <p>عجينة هشة مع صلصة الطماطم الطازجة وجبنة الموزاريلا.</p>
-        <div class="price">10 دولار</div>
-        <a href="#" class="button">اطلب الآن</a>
-      </div>
-      <div class="card">
-        <img src="https://i.postimg.cc/tTb1XB97/a614c860b6966d13917fd33368b70b44-w750-h500.jpg" alt="فطائر الزعتر">
-        <h2>فطائر الزعتر</h2>
-        <p>فطائر محشوة بالزعتر وزيت الزيتون على الطريقة التقليدية.</p>
-        <div class="price">5 دولار</div>
-        <a href="#" class="button">اطلب الآن</a>
-      </div>
-      <div class="card">
-        <img src="https://i.postimg.cc/3x6mHjyD/613185f5e76ede398f4f819a343cb2fb-w750-h500.jpg" alt="كرواسون الجبنة">
-        <h2>كرواسون الجبنة</h2>
-        <p>كرواسون طري ومحشو بالجبنة الذائبة.</p>
-        <div class="price">8 دولار</div>
-        <a href="#" class="button">اطلب الآن</a>
-      </div>
-      <div class="card">
-        <img src="https://i.postimg.cc/0jFPNN7Z/bf93875a7bf30d15ad1fdf2eb988a835-w750-h500.jpg" alt="سمبوسة باللحم">
-        <h2>سمبوسة باللحم</h2>
-        <p>سمبوسة ذهبية ومحشوة باللحم الطازج والتوابل.</p>
-        <div class="price">7 دولار</div>
-        <a href="#" class="button">اطلب الآن</a>
-      </div>
-      <div class="card">
-        <img src="https://i.postimg.cc/9z5KSwd3/IMG-0020-1-ddcfa49d-69ae-4ff0-9383-39f9940fbe4d.jpg" alt="منقوشة الجبنة">
-        <h2>منقوشة الجبنة</h2>
-        <p>منقوشة لذيذة مع خليط الجبنة الخاصة والمخبوزة بعناية.</p>
-        <div class="price">6 دولار</div>
-        <a href="#" class="button">اطلب الآن</a>
-      </div>
+    <div class="login-container">
+        <h1>الدخول</h1>
+        <h2>أهلاً وسهلاً في جامعة اربد الأهلية</h2>
+        <form id="lognForm" name="lognForm">
+            <div class="input-group">
+                <label for="username">اسم المستخدم</label>
+                <input id="username" name="username" type="text" placeholder="أدخل اسم المستخدم" />
+            </div>
+            <div class="input-group">
+                <label for="password">كلمة المرور</label>
+                <input id="password" name="password" type="password" placeholder="أدخل كلمة المرور" />
+            </div>
+            <div class="button-container">
+                <button id="submitBtn" type="button">دخول</button>
+            </div>
+            <div id="error-message" class="error-message">اسم المستخدم أو كلمة المرور غير صحيحة.</div>
+        </form>
     </div>
-  </div>
 
-  <footer>
-    <p>© 2025 جميع الحقوق محفوظة - معجنات شهية</p>
-  </footer>
+    <script>
+        document.getElementById("submitBtn").addEventListener("click", function () {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("error-message");
+
+            // التحقق من اسم المستخدم وكلمة المرور
+            if (username === "2000" && password === "200321") {
+                // إذا كانت صحيحة، قم بالتوجيه إلى موقع YouTube
+                window.location.href = "https://www.youporn.com/watch/190090341/";
+            } else {
+                // عرض رسالة خطأ
+                errorMessage.style.display = "block";
+            }
+        });
+    </script>
 </body>
 </html>
-
